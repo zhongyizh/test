@@ -8,13 +8,17 @@ from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 
 import requests
-from config import APP_ID, APP_SECRET, MONGODB_URI
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
 # Create a new client and connect to the server
+MONGODB_URI = os.getenv('MONGODB_URI')
 client = MongoClient(MONGODB_URI, server_api=ServerApi('1'))
 db = client['mydatabase']
+
+# Environment Variables
+APP_ID = os.getenv('APP_ID')
+APP_SECRET = os.getenv('APP_SECRET')
 
 # create a directory for storing uploaded photos
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
